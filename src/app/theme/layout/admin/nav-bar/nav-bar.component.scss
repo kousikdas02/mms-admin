@@ -1,0 +1,13 @@
+.shadow {
+    -webkit-box-shadow: 1px 5px 15px 0px rgba(0, 0, 0, 0.11);
+    -moz-box-shadow: 1px 5px 15px 0px rgba(0, 0, 0, 0.11);
+    box-shadow: 1px 5px 15px 0px rgba(0, 0, 0, 0.11);
+}
+
+.logoWrapper{
+    margin-top: 10px;
+    width: 80px;
+    img{
+        width: 100%;
+    }
+}
