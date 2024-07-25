@@ -35,18 +35,10 @@ const routes: Routes = [
         path: 'bookings',
         loadComponent: () => import('./modules/admin/bookings/bookings.component')
       },
-      // {
-      //   path: 'tables',
-      //   loadChildren: () => import('./demo/pages/tables/tables.module').then((m) => m.TablesModule)
-      // },
-      // {
-      //   path: 'apexchart',
-      //   loadComponent: () => import('./demo/chart/apex-chart/apex-chart.component')
-      // },
-      // {
-      //   path: 'sample-page',
-      //   loadComponent: () => import('./demo/extra/sample-page/sample-page.component')
-      // }
+      {
+        path: 'settings',
+        loadComponent: () => import('./modules/admin/settings/settings.component')
+      },
     ]
   }
 ];

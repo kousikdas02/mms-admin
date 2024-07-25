@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="Basic Details" [options]="false">
+            <form action="javascript:" class="needs-validation" novalidate>
+                <div class="row form-group">
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom01">First name</label>
+                        <input type="text" class="form-control" id="validationCustom01" placeholder="First name"
+                            value="Mark" required />
+                    </div>
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom02">Last name</label>
+                        <input type="text" class="form-control" id="validationCustom02" placeholder="Last name"
+                            value="Otto" required />
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom02">Last name</label>
+                        <input type="text" class="form-control" id="validationCustom02" placeholder="Email name"
+                            value="example.com" required />
+                    </div>
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom01">Gender</label>
+                        <select class="mb-3 form-control">
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">Submit form</button>
+            </form>
+        </app-card>
+
+        <app-card cardTitle="Change Password" [options]="false">
+            <form action="javascript:" class="needs-validation" novalidate>
+                <div class="row form-group">
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom01">New Password</label>
+                        <input type="password" class="form-control" id="validationCustom01" placeholder="First name"
+                            value="Mark" required />
+                    </div>
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom02">Current Password</label>
+                        <input type="password" class="form-control" id="validationCustom02" placeholder="Last name"
+                            value="Otto" required />
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom02">Confirm Password</label>
+                        <input type="password" class="form-control" id="validationCustom02" placeholder="Email name"
+                            value="example.com" required />
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">Submit form</button>
+            </form>
+        </app-card>
+    </div>
+</div>

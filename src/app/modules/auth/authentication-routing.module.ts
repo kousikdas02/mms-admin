@@ -9,10 +9,10 @@ const routes: Routes = [
         path: 'signin',
         loadComponent: () => import('./auth-signin/auth-signin.component')
       },
-      // {
-      //   path: 'signup',
-      //   loadComponent: () => import('./auth-signup/auth-signup.component')
-      // }
+      {
+        path: 'reset',
+        loadComponent: () => import('./reset-password/reset-password.component')
+      }
     ]
   }
 ];
