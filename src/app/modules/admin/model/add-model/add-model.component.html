@@ -12,15 +12,14 @@
                     </div>               
                     <div class="col-md-6 mb-6">
                         <label for="validationCustom02">Manufacturer*</label>
-                            <select name="cars" id="cars" class="form-control" formControlName="name">
-                                <option value="volvo">Volvo</option>
-                                <option value="saab">Saab</option>
-                                <option value="mercedes">Mercedes</option>
-                                <option value="audi">Audi</option>
+                            <select class="mb-3 form-control" formControlName="manufacturer">
+                                @for (item of manufacturerList; track $index) {
+                                    <option [value]="item._id">{{item.name}}</option>
+                                }
                               </select>
                     </div>
                 </div>
-                <button class="btn btn-primary" type="button" (click)="createManufacturer()">Create Model</button>
+                <button class="btn btn-primary" type="button" (click)="createModel()">Create Model</button>
             </form>
         </app-card>
     </div>

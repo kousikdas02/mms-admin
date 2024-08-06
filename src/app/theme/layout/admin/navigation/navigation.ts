@@ -75,6 +75,14 @@ const NavigationItems = [
         url: '/models',
         icon: 'feather icon-user',
         classes: 'nav-item'
+      },
+      {
+        id: 'engine',
+        title: 'Engine',
+        type: 'item',
+        url: '/engines',
+        icon: 'feather icon-user',
+        classes: 'nav-item'
       }
     ]
   },

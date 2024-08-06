@@ -78,6 +78,18 @@ const routes: Routes = [
         path: 'models/:modelId',
         loadComponent: () => import('./modules/admin/model/edit-model/edit-model.component').then((m) => m.EditModelComponent)
       },
+      {
+        path: 'engines',
+        loadComponent: () => import('./modules/admin/engine/engine.component').then((m)=>m.EngineComponent)
+      },
+      {
+        path: 'engines/add',
+        loadComponent: () => import('./modules/admin/engine/add-engine/add-engine.component').then((m) => m.AddEngineComponent)
+      },
+      {
+        path: 'engines/:engineId',
+        loadComponent: () => import('./modules/admin/engine/edit-engine/edit-engine.component').then((m) => m.EditEngineComponent)
+      },
     ]
   }
 ];

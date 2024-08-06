@@ -34,11 +34,11 @@ export class EditManufacturerComponent {
   private formInit(): void {
     this.manufacturerForm = this._formBuilder.group({
       name: new FormControl('', [Validators.required]),
-      images: new FormControl('', [Validators.required]),
+      images: new FormControl('', []),
     });
   }
-  getManufacturerDetails(serviceId: string) {
-    this._apiService.get(`manufacturer/${serviceId}`).subscribe({
+  getManufacturerDetails(manufacturerId: string) {
+    this._apiService.get(`manufacturer/${manufacturerId}`).subscribe({
       next: (resp: any) => {
         if (resp.status === 200) {
           this.manufacturerDetails = resp.data;

@@ -9,34 +9,34 @@ import { ApiService } from '@services'
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-add-model',
+  selector: 'app-add-engine',
   standalone: true,
   imports: [NgbDropdownModule, SharedModule, ReactiveFormsModule, RouterLink, FormsModule, MatSlideToggleModule, MatInputModule,MatIcon],
-  templateUrl: './add-model.component.html',
-  styleUrl: './add-model.component.scss'
+  templateUrl: './add-engine.component.html',
+  styleUrl: './add-engine.component.scss'
 })
-export class AddModelComponent {
-  modelForm: FormGroup = new FormGroup({});
-  manufacturerList: any[] = [];
+export class AddEngineComponent {
+  engineForm: FormGroup = new FormGroup({});
+  modelList: any[] = [];
 
   constructor(private _formBuilder: FormBuilder,
     private _apiService: ApiService,
     private _router: Router) {
     this.formInit();
-    this.getManufacturerList();
+    this.getModelList();
   }
   private formInit(): void {
-    this.modelForm = this._formBuilder.group({
+    this.engineForm = this._formBuilder.group({
       name: new FormControl('', [Validators.required]),
-      manufacturer: new FormControl('', [Validators.required]),
+      model: new FormControl('', [Validators.required]),
     });
   }
 
-  getManufacturerList() {
-    this._apiService.get('manufacturer').subscribe({
+  getModelList() {
+    this._apiService.get('model').subscribe({
       next: (resp: any) => {
         if (resp.status === 200) {
-          this.manufacturerList = resp.data;
+          this.modelList = resp.data;
         } else {
           this._apiService.alert(resp.message, 'warning');
         }
@@ -48,18 +48,18 @@ export class AddModelComponent {
   }
 
 
-  createModel(): void {
-    console.log(this.modelForm)
-    if (this.modelForm.invalid) {
-      this.modelForm.markAllAsTouched();
+  createEngine(): void {
+    console.log(this.engineForm)
+    if (this.engineForm.invalid) {
+      this.engineForm.markAllAsTouched();
       return;
     }
 
-    this._apiService.post('model', this.modelForm.value).subscribe({
+    this._apiService.post('engine', this.engineForm.value).subscribe({
       next: (resp: any) => {
         if (resp.status === 200) {
-          this._apiService.alert('Successfully created model.', 'success');
-          this.modelForm.reset();
+          this._apiService.alert('Successfully created engine.', 'success');
+          this.engineForm.reset();
         } else {
           this._apiService.alert(resp.message, 'warning');
         }
@@ -71,7 +71,8 @@ export class AddModelComponent {
   }
 
   back(){
-    this._router.navigate(['models'])
+    this._router.navigate(['engines'])
   }
 }
+
 

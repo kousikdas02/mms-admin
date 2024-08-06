@@ -36,7 +36,7 @@ export class EditServiceComponent {
     this.serviceForm = this._formBuilder.group({
       name: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
-      images: new FormControl('', [Validators.required]),
+      images: new FormControl('', []),
       price: new FormControl('', [Validators.required]),
     });
   }

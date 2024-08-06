@@ -9,40 +9,40 @@ import { ApiService } from '@services'
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-edit-model',
+  selector: 'app-edit-engine',
   standalone: true,
   imports: [NgbDropdownModule, SharedModule, ReactiveFormsModule, RouterLink, FormsModule, MatSlideToggleModule, MatInputModule,MatIcon],
-  templateUrl: './edit-model.component.html',
-  styleUrl: './edit-model.component.scss'
+  templateUrl: './edit-engine.component.html',
+  styleUrl: './edit-engine.component.scss'
 })
-export class EditModelComponent {
-  modelForm: FormGroup = new FormGroup({});
-  manufacturerList: any[] = [];
-  modelDetails: any;
+export class EditEngineComponent {
+  engineForm: FormGroup = new FormGroup({});
+  modelList: any[] = [];
+  engineDetails: any;
 
   constructor(private _formBuilder: FormBuilder,
     private _apiService: ApiService,
     private _router: Router,
     private _route: ActivatedRoute) {
     this.formInit();
-    this.getManufacturerList().then(()=>{
-      this.getModelDetails(this._route.snapshot.paramMap.get('modelId'));
+    this.getModelList().then(()=>{
+      this.getEngineDetails(this._route.snapshot.paramMap.get('engineId'));
     })
   }
   private formInit(): void {
-    this.modelForm = this._formBuilder.group({
+    this.engineForm = this._formBuilder.group({
       name: new FormControl('', [Validators.required]),
-      manufacturer: new FormControl('', [Validators.required]),
+      model: new FormControl('', [Validators.required]),
     });
   }
-  getModelDetails(modelId: string) {
-    this._apiService.get(`model/${modelId}`).subscribe({
+  getEngineDetails(engineId: string) {
+    this._apiService.get(`engine/${engineId}`).subscribe({
       next: (resp: any) => {
         if (resp.status === 200) {
-          this.modelDetails = resp.data;
-          this.modelForm.patchValue({
+          this.engineDetails = resp.data;
+          this.engineForm.patchValue({
             name: resp.data.name,
-            manufacturer : resp.data.manufacturer._id
+            model : resp.data.model._id
           })
         } else {
           this._apiService.alert(resp.message, 'warning');
@@ -54,12 +54,12 @@ export class EditModelComponent {
     })
   }
 
-  getManufacturerList() {
+  getModelList() {
     return new Promise<void>((resolve,reject)=>{
-      this._apiService.get('manufacturer').subscribe({
+      this._apiService.get('model').subscribe({
         next: (resp: any) => {
           if (resp.status === 200) {
-            this.manufacturerList = resp.data;
+            this.modelList = resp.data;
             resolve()
           } else {
             // this._apiService.alert(resp.message, 'warning');
@@ -75,18 +75,18 @@ export class EditModelComponent {
   }
 
 
-  editModel(): void {
-    console.log(this.modelForm)
-    if (this.modelForm.invalid) {
-      this.modelForm.markAllAsTouched();
+  editEngine(): void {
+    console.log(this.engineForm)
+    if (this.engineForm.invalid) {
+      this.engineForm.markAllAsTouched();
       return;
     }
 
-    this._apiService.put(`model/${this.modelDetails._id}`, this.modelForm.value).subscribe({
+    this._apiService.put(`engine/${this.engineDetails._id}`, this.engineForm.value).subscribe({
       next: (resp: any) => {
         if (resp.status === 200) {
-          this._apiService.alert('Successfully edited model.', 'success');
-          this.modelForm.reset();
+          this._apiService.alert('Successfully edited engine.', 'success');
+          this.engineForm.reset();
           this.back();
         } else {
           this._apiService.alert(resp.message, 'warning');
@@ -99,8 +99,9 @@ export class EditModelComponent {
   }
 
   back(){
-    this._router.navigate(['models'])
+    this._router.navigate(['engines'])
   }
 }
+
 
 

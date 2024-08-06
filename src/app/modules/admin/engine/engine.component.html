@@ -1,43 +1,43 @@
 <div class="row">
     <div class="col-xl-12">
       <div class="button_wrapper">
-        <button (click)="addModel()">Add Model</button>
+        <button (click)="addEngine()">Add Engine</button>
       </div>
-      <app-card cardTitle="Model List" [options]="false" blockClass="table-border-style">
+      <app-card cardTitle="Engine List" [options]="false" blockClass="table-border-style">
         <div class="table-responsive">
           <table class="table table-hover">
             <thead>
               <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th>Manufacturer</th>
+                <th>Model</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
-              @for (modelItem of modelList; track $index) {
+              @for (engineItem of engineList; track $index) {
               <tr>
                 <th scope="row">{{$index+1}}</th>
-                <td>{{modelItem.name}}</td>
-                <td>{{modelItem.manufacturer.name}}</td>
+                <td>{{engineItem.name}}</td>
+                <td>{{engineItem.model.name}}</td>
                 <td>
-                  <span class="badge" [ngClass]="modelItem.status=='active' ? 'bg-success' : 'bg-danger'">{{modelItem.status}}</span>
+                  <span class="badge" [ngClass]="engineItem.status=='active' ? 'bg-success' : 'bg-danger'">{{engineItem.status}}</span>
                 </td>
                 <td class="text-right">
                   <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                     <mat-icon>more_vert</mat-icon>
                   </button>
                   <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="editModel(modelItem._id)">
+                    <button mat-menu-item (click)="editEngine(engineItem._id)">
                       <span>Edit</span>
                     </button>
-                    <button mat-menu-item [disabled]="modelItem.status=='active'" (click)="changeStatus(modelItem.status,modelItem._id)">
+                    <button mat-menu-item [disabled]="engineItem.status=='active'" (click)="changeStatus(engineItem.status,engineItem._id)">
                       <span>Make Active</span>
                     </button>
-                    <button mat-menu-item [disabled]="modelItem.status=='inactive'" (click)="changeStatus(modelItem.status,modelItem._id)">
+                    <button mat-menu-item [disabled]="engineItem.status=='inactive'" (click)="changeStatus(engineItem.status,engineItem._id)">
                       <span>Make Inactive</span>
                     </button>
-                    <button mat-menu-item  (click)="deleteModel(modelItem._id)">
+                    <button mat-menu-item  (click)="deleteEngine(engineItem._id)">
                       <span>Delete</span>
                     </button>
                   </mat-menu>
