@@ -24,9 +24,7 @@ export class AddServiceComponent {
 
   constructor(private _formBuilder: FormBuilder,
     private _apiService: ApiService,
-    private _router: Router,
-    private _event: EventService,
-    private _storage: StorageService) {
+    private _router: Router) {
     this.formInit();
   }
   private formInit(): void {
