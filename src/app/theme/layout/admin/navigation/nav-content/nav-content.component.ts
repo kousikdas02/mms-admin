@@ -14,7 +14,6 @@ import { environment } from 'src/environments/environment';
 export class NavContentComponent {
   // public props
   title = 'Demo application for version numbering';
-  currentApplicationVersion = environment.appVersion;
   @Output() onNavCollapsedMob = new EventEmitter();
   navigation: any;
   windowWidth: number;

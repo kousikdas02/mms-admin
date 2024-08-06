@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-xl-12">
+    <div class="button_wrapper">
+      <button (click)="addService()">Add Service</button>
+    </div>
+    <app-card cardTitle="Services List" [options]="false" blockClass="table-border-style">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (serviceItem of serviceList; track $index) {
+            <tr>
+              <th scope="row">{{$index+1}}</th>
+              <td>{{serviceItem.name}}</td>
+              <td>RM {{serviceItem.price}}</td>
+              <td>
+                <span class="badge" [ngClass]="serviceItem.status=='active' ? 'bg-success' : 'bg-danger'">{{serviceItem.status}}</span>
+              </td>
+              <td class="text-right">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="editService(serviceItem._id)">
+                    <span>Edit</span>
+                  </button>
+                  <button mat-menu-item [disabled]="serviceItem.status=='active'" (click)="changeStatus(serviceItem.status,serviceItem._id)">
+                    <span>Make Active</span>
+                  </button>
+                  <button mat-menu-item [disabled]="serviceItem.status=='inactive'" (click)="changeStatus(serviceItem.status,serviceItem._id)">
+                    <span>Make Inactive</span>
+                  </button>
+                  <button mat-menu-item  (click)="deleteService(serviceItem._id)">
+                    <span>Delete</span>
+                  </button>
+                </mat-menu>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+</div>

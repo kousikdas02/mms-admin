@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="button_wrapper">
+            <button (click)="back()">Back</button>
+          </div>
+        <app-card cardTitle="Basic Details" [options]="false">
+            <form [formGroup]="serviceForm">
+                <div class="row form-group">
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom01">Name*</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter Name" formControlName="name"/>
+                    </div>
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom01">Price*</label>
+                        <input type="text" class="form-control" id="price" placeholder="Enter Price" formControlName="price"/>
+                    </div>
+                    <div class="col-md-12 mb-12">
+                        <label for="validationCustom02">Description*</label>
+                        <textarea type="text" class="form-control" id="description"
+                            placeholder="Enter Description" formControlName="description"></textarea>
+                    </div>                   
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom02">Image*</label>
+                        <input type="file" class="form-control" id="image" placeholder="Select file"
+                            accept="image/png,image/jpg,image/jpeg" (change)="fileAdded($event)" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6 mb-6">
+                        <ng-container *ngIf="previewUploadedFiles.length > 0">
+                            <div class="previewImages">
+                                <ng-container *ngFor="let image of previewUploadedFiles;let i = index">
+                                    <div style="margin-right: 10px;">
+                                        <mat-icon class="deleteIcon"
+                                            (click)="deleteFiles(i)">remove_circle</mat-icon>
+                                        <img class="preview_image" src="{{ image }}" alt="" />
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="previewUploadedFiles.length == 0">
+                            <div class="previewImages">
+                                <ng-container *ngFor="let image of serviceDetails?.images;let i = index">
+                                    <div style="margin-right: 10px;">
+                                        <img class="preview_image" src="{{ fileUrl+image }}" alt="" />
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="button" (click)="editService()">Edit Service</button>
+            </form>
+        </app-card>
+    </div>
+</div>

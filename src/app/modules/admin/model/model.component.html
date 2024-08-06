@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-xl-12">
+      <div class="button_wrapper">
+        <button (click)="addModel()">Add Model</button>
+      </div>
+      <app-card cardTitle="Services List" [options]="false" blockClass="table-border-style">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Manufacturer</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (modelItem of modelList; track $index) {
+              <tr>
+                <th scope="row">{{$index+1}}</th>
+                <td>{{modelItem.name}}</td>
+                <td>{{modelItem.manufacturer.name}}</td>
+                <td>
+                  <span class="badge" [ngClass]="modelItem.status=='active' ? 'bg-success' : 'bg-danger'">{{modelItem.status}}</span>
+                </td>
+                <td class="text-right">
+                  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="editModel(modelItem._id)">
+                      <span>Edit</span>
+                    </button>
+                    <button mat-menu-item [disabled]="modelItem.status=='active'" (click)="changeStatus(modelItem.status,modelItem._id)">
+                      <span>Make Active</span>
+                    </button>
+                    <button mat-menu-item [disabled]="modelItem.status=='inactive'" (click)="changeStatus(modelItem.status,modelItem._id)">
+                      <span>Make Inactive</span>
+                    </button>
+                    <button mat-menu-item  (click)="deleteModel(modelItem._id)">
+                      <span>Delete</span>
+                    </button>
+                  </mat-menu>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </app-card>
+    </div>
+  </div>

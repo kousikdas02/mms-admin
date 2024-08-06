@@ -51,6 +51,30 @@ const NavigationItems = [
         url: '/bookings',
         icon: 'feather icon-user',
         classes: 'nav-item'
+      },
+      {
+        id: 'services',
+        title: 'Services',
+        type: 'item',
+        url: '/services',
+        icon: 'feather icon-user',
+        classes: 'nav-item'
+      },
+      {
+        id: 'manufacturer',
+        title: 'Manufacturer',
+        type: 'item',
+        url: '/manufacturers',
+        icon: 'feather icon-user',
+        classes: 'nav-item'
+      },
+      {
+        id: 'model',
+        title: 'Model',
+        type: 'item',
+        url: '/models',
+        icon: 'feather icon-user',
+        classes: 'nav-item'
       }
     ]
   },

@@ -23,7 +23,18 @@
     "lib": [
       "ES2022", // this will auto target to latest by angular cli
       "dom"
-    ]
+    ],
+    "paths": {
+      "@services": [
+        "src/services"
+      ],
+      "@authGuard": [
+        "src/app/guard"
+      ],
+      "@env": [
+        "src/environments/environment"
+      ],
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

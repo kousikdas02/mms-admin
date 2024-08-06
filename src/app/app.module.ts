@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { authInterceptor, loggingInterceptor } from './interceptor/interceptor';
 
 // project import
 import { AppComponent } from './app.component';
@@ -42,7 +44,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     ToggleFullScreenDirective
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, SharedModule, BrowserAnimationsModule],
-  providers: [NavigationItem, provideAnimationsAsync()],
+  providers: [NavigationItem, provideAnimationsAsync(),provideHttpClient(withFetch(), withInterceptors([authInterceptor, loggingInterceptor])),],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
