@@ -14,9 +14,9 @@ export class NavRightComponent {
     private _router: Router
   ) { }
   logout() {
-    this._storage.clearUser()
+    this._router.navigateByUrl('auth/signin')
+    this._storage.clearUser();
     this._event.user.set(null);
-    this._event.isLoggedIn.set(true);
-    this._router.navigate(['auth','signin']);
+    this._event.isLoggedIn.set(false);
   }
 }

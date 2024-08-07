@@ -40,6 +40,7 @@ export default class AuthSigninComponent {
     }
     this._apiService.post('auth/signin', this.loginForm.value).subscribe({
       next: (resp: any) => {
+        console.log(resp)
         if(resp.data.role != 'admin'){
           this._apiService.alert('Only Admins are allowed', 'warning');
           return;
@@ -67,12 +68,10 @@ export default class AuthSigninComponent {
 
       },
       error: (err: any) => {
-        this._apiService.alert(err.message, 'error')
+        console.log(err)
+        this._apiService.alert(err.error.message, 'error')
       }
     })
-
-
-
   }
 
 
