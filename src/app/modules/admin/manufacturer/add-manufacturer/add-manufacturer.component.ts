@@ -8,15 +8,16 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { ApiService } from '@services'
 import { MatIcon } from '@angular/material/icon';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-add-manufacturer',
   standalone: true,
-  imports: [NgbDropdownModule, SharedModule, ReactiveFormsModule, RouterLink, FormsModule, MatSlideToggleModule, MatInputModule,MatIcon],
+  imports: [NgbDropdownModule, SharedModule, ReactiveFormsModule, RouterLink, FormsModule, MatSlideToggleModule, MatInputModule, MatIcon, NgIf],
   templateUrl: './add-manufacturer.component.html',
   styleUrl: './add-manufacturer.component.scss'
 })
-export class AddManufacturerComponent  {
+export class AddManufacturerComponent {
   manufacturerForm: FormGroup = new FormGroup({});
 
   uploadedFiles: File[] = [];
@@ -72,7 +73,7 @@ export class AddManufacturerComponent  {
   fileAdded(event: Event) {
     const inputValue = event.target as HTMLInputElement;
     if (inputValue.files && inputValue.files.length > 0) {
-      const files:File[] = [];
+      const files: File[] = [];
       for (let i = 0; i < inputValue.files.length; i++) {
         this.uploadedFiles.push(<File>inputValue.files[i]);
         files.push(<File>inputValue.files[i]);
@@ -89,7 +90,7 @@ export class AddManufacturerComponent  {
         }
       }
       this.manufacturerForm.patchValue({
-        images : files
+        images: files
       })
     }
   }
@@ -100,7 +101,7 @@ export class AddManufacturerComponent  {
     (document.getElementById('image') as HTMLInputElement).value = null;
   }
 
-  back(){
+  back() {
     this._router.navigate(['manufacturers'])
   }
 }

@@ -7,11 +7,12 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { ApiService } from '@services'
 import { MatIcon } from '@angular/material/icon';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-edit-engine',
   standalone: true,
-  imports: [NgbDropdownModule, SharedModule, ReactiveFormsModule, RouterLink, FormsModule, MatSlideToggleModule, MatInputModule,MatIcon],
+  imports: [NgbDropdownModule, SharedModule, ReactiveFormsModule, RouterLink, FormsModule, MatSlideToggleModule, MatInputModule, MatIcon, NgIf],
   templateUrl: './edit-engine.component.html',
   styleUrl: './edit-engine.component.scss'
 })
@@ -25,7 +26,7 @@ export class EditEngineComponent {
     private _router: Router,
     private _route: ActivatedRoute) {
     this.formInit();
-    this.getModelList().then(()=>{
+    this.getModelList().then(() => {
       this.getEngineDetails(this._route.snapshot.paramMap.get('engineId'));
     })
   }
@@ -42,7 +43,7 @@ export class EditEngineComponent {
           this.engineDetails = resp.data;
           this.engineForm.patchValue({
             name: resp.data.name,
-            model : resp.data.model._id
+            model: resp.data.model._id
           })
         } else {
           this._apiService.alert(resp.message, 'warning');
@@ -55,7 +56,7 @@ export class EditEngineComponent {
   }
 
   getModelList() {
-    return new Promise<void>((resolve,reject)=>{
+    return new Promise<void>((resolve, reject) => {
       this._apiService.get('model').subscribe({
         next: (resp: any) => {
           if (resp.status === 200) {
@@ -71,7 +72,7 @@ export class EditEngineComponent {
           resolve()
         }
       })
-    });    
+    });
   }
 
 
@@ -98,7 +99,7 @@ export class EditEngineComponent {
     });
   }
 
-  back(){
+  back() {
     this._router.navigate(['engines'])
   }
 }

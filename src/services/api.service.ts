@@ -72,6 +72,9 @@ export class ApiService {
       showConfirmButton: false,
       timer: duraion ? duraion : 2000,
       timerProgressBar: true,
+      customClass: {
+        title: 'alert-toast-title',
+      }
     });
   }
   // SHOW ALERT AS A POPUP WHEN REQUIRED
@@ -84,6 +87,9 @@ export class ApiService {
         showConfirmButton: true,
         showCancelButton: CancelButton,
         confirmButtonText: btn,
+        customClass: {
+          title: 'alert-title',
+        },
       });
 
     } else {
@@ -94,6 +100,9 @@ export class ApiService {
         showConfirmButton: true,
         showCancelButton: CancelButton,
         confirmButtonText: 'Delete',
+        customClass: {
+          title: 'alert-title',
+        },
       });
     }
   }

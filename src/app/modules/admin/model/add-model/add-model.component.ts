@@ -7,11 +7,12 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { ApiService } from '@services'
 import { MatIcon } from '@angular/material/icon';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-add-model',
   standalone: true,
-  imports: [NgbDropdownModule, SharedModule, ReactiveFormsModule, RouterLink, FormsModule, MatSlideToggleModule, MatInputModule,MatIcon],
+  imports: [NgbDropdownModule, SharedModule, ReactiveFormsModule, RouterLink, FormsModule, MatSlideToggleModule, MatInputModule, MatIcon, NgIf],
   templateUrl: './add-model.component.html',
   styleUrl: './add-model.component.scss'
 })
@@ -70,7 +71,7 @@ export class AddModelComponent {
     });
   }
 
-  back(){
+  back() {
     this._router.navigate(['models'])
   }
 }

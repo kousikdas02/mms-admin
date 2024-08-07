@@ -9,15 +9,16 @@ import { MatInputModule } from '@angular/material/input';
 import { ApiService } from '@services'
 import { MatIcon } from '@angular/material/icon';
 import { environment } from '@env'
+import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-edit-manufacturer',
   standalone: true,
-  imports: [NgbDropdownModule, SharedModule, ReactiveFormsModule, RouterLink, FormsModule, MatSlideToggleModule, MatInputModule,MatIcon],
+  imports: [NgbDropdownModule, SharedModule, ReactiveFormsModule, RouterLink, FormsModule, MatSlideToggleModule, MatInputModule, MatIcon, NgIf],
   templateUrl: './edit-manufacturer.component.html',
   styleUrl: './edit-manufacturer.component.scss'
 })
 export class EditManufacturerComponent {
-  readonly fileUrl:string = environment.BASE_FILE_PATH+'manufacturers/';
+  readonly fileUrl: string = environment.BASE_FILE_PATH + 'manufacturers/';
   manufacturerForm: FormGroup = new FormGroup({});
 
   uploadedFiles: File[] = [];
@@ -87,7 +88,7 @@ export class EditManufacturerComponent {
   fileAdded(event: Event) {
     const inputValue = event.target as HTMLInputElement;
     if (inputValue.files && inputValue.files.length > 0) {
-      const files:File[] = [];
+      const files: File[] = [];
       for (let i = 0; i < inputValue.files.length; i++) {
         this.uploadedFiles.push(<File>inputValue.files[i]);
         files.push(<File>inputValue.files[i]);
@@ -104,7 +105,7 @@ export class EditManufacturerComponent {
         }
       }
       this.manufacturerForm.patchValue({
-        images : files
+        images: files
       })
     }
   }
@@ -114,8 +115,8 @@ export class EditManufacturerComponent {
     this.previewUploadedFiles.splice(index, 1);
     (document.getElementById('image') as HTMLInputElement).value = null;
   }
-  
-  back(){
+
+  back() {
     this._router.navigate(['manufacturers'])
   }
 }

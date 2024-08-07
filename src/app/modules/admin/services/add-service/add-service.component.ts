@@ -8,11 +8,12 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { ApiService } from '@services'
 import { MatIcon } from '@angular/material/icon';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-add-service',
   standalone: true,
-  imports: [NgbDropdownModule, SharedModule, ReactiveFormsModule, RouterLink, FormsModule, MatSlideToggleModule, MatInputModule,MatIcon],
+  imports: [NgbDropdownModule, SharedModule, ReactiveFormsModule, RouterLink, FormsModule, MatSlideToggleModule, MatInputModule, MatIcon, NgIf],
   templateUrl: './add-service.component.html',
   styleUrl: './add-service.component.scss'
 })
@@ -74,7 +75,7 @@ export class AddServiceComponent {
   fileAdded(event: Event) {
     const inputValue = event.target as HTMLInputElement;
     if (inputValue.files && inputValue.files.length > 0) {
-      const files:File[] = [];
+      const files: File[] = [];
       for (let i = 0; i < inputValue.files.length; i++) {
         this.uploadedFiles.push(<File>inputValue.files[i]);
         files.push(<File>inputValue.files[i]);
@@ -91,7 +92,7 @@ export class AddServiceComponent {
         }
       }
       this.serviceForm.patchValue({
-        images : files
+        images: files
       })
     }
   }
@@ -103,7 +104,7 @@ export class AddServiceComponent {
   }
 
 
-  back(){
+  back() {
     this._router.navigate(['services'])
   }
 }

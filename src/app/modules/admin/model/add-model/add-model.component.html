@@ -1,22 +1,29 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="button_wrapper">
-            <button (click)="back()">Back</button>
-          </div>
+            <button (click)="back()" class="cmnBtn mb-3">Back</button>
+        </div>
         <app-card cardTitle="Basic Details" [options]="false">
             <form [formGroup]="modelForm">
                 <div class="row form-group">
                     <div class="col-md-6 mb-6">
                         <label for="validationCustom01">Name*</label>
-                        <input type="text" class="form-control" id="name" placeholder="Enter Name" formControlName="name"/>
-                    </div>               
+                        <input type="text" class="form-control" id="name" placeholder="Enter Name"
+                            formControlName="name" />
+                        <p class="error"
+                            *ngIf="modelForm.get('name').touched && modelForm.get('name').hasError('required')">Name
+                            is required</p>
+                    </div>
                     <div class="col-md-6 mb-6">
                         <label for="validationCustom02">Manufacturer*</label>
-                            <select class="mb-3 form-control" formControlName="manufacturer">
-                                @for (item of manufacturerList; track $index) {
-                                    <option [value]="item._id">{{item.name}}</option>
-                                }
-                              </select>
+                        <select class="form-control" formControlName="manufacturer">
+                            @for (item of manufacturerList; track $index) {
+                            <option [value]="item._id">{{item.name}}</option>
+                            }
+                        </select>
+                        <p class="error"
+                            *ngIf="modelForm.get('manufacturer').touched && modelForm.get('manufacturer').hasError('required')">
+                            Manufacturer is required</p>
                     </div>
                 </div>
                 <button class="btn btn-primary" type="button" (click)="createModel()">Create Model</button>

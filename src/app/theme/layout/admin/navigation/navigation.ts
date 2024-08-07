@@ -33,7 +33,7 @@ const NavigationItems = [
         title: 'Dashboard',
         type: 'item',
         url: '/dashboard',
-        icon: 'feather icon-home',
+        icon: 'fas fa-home',
         classes: 'nav-item'
       },
       {
@@ -41,7 +41,7 @@ const NavigationItems = [
         title: 'Users',
         type: 'item',
         url: '/users',
-        icon: 'feather icon-user',
+        icon: 'far fa-user',
         classes: 'nav-item'
       },
       {
@@ -49,7 +49,7 @@ const NavigationItems = [
         title: 'Bookings',
         type: 'item',
         url: '/bookings',
-        icon: 'feather icon-user',
+        icon: 'far fa-calendar-alt',
         classes: 'nav-item'
       },
       {
@@ -57,7 +57,7 @@ const NavigationItems = [
         title: 'Services',
         type: 'item',
         url: '/services',
-        icon: 'feather icon-user',
+        icon: 'fas fa-wrench',
         classes: 'nav-item'
       },
       {
@@ -65,7 +65,7 @@ const NavigationItems = [
         title: 'Manufacturer',
         type: 'item',
         url: '/manufacturers',
-        icon: 'feather icon-user',
+        icon: 'fas fa-industry',
         classes: 'nav-item'
       },
       {
@@ -73,7 +73,7 @@ const NavigationItems = [
         title: 'Model',
         type: 'item',
         url: '/models',
-        icon: 'feather icon-user',
+        icon: 'fas fa-car',
         classes: 'nav-item'
       },
       {
@@ -81,7 +81,7 @@ const NavigationItems = [
         title: 'Engine',
         type: 'item',
         url: '/engines',
-        icon: 'feather icon-user',
+        icon: 'fas fa-car-battery',
         classes: 'nav-item'
       }
     ]

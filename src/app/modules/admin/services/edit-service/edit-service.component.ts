@@ -9,15 +9,16 @@ import { MatInputModule } from '@angular/material/input';
 import { ApiService } from '@services'
 import { MatIcon } from '@angular/material/icon';
 import { environment } from '@env'
+import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-edit-service',
   standalone: true,
-  imports: [NgbDropdownModule, SharedModule, ReactiveFormsModule, RouterLink, FormsModule, MatSlideToggleModule, MatInputModule, MatIcon],
+  imports: [NgbDropdownModule, SharedModule, ReactiveFormsModule, RouterLink, FormsModule, MatSlideToggleModule, MatInputModule, MatIcon, NgIf],
   templateUrl: './edit-service.component.html',
   styleUrl: './edit-service.component.scss'
 })
 export class EditServiceComponent {
-  readonly fileUrl:string = environment.BASE_FILE_PATH+'services/';
+  readonly fileUrl: string = environment.BASE_FILE_PATH + 'services/';
   serviceForm: FormGroup = new FormGroup({});
 
   uploadedFiles: File[] = [];
