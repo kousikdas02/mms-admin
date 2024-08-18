@@ -5,33 +5,34 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>#</th>
-              <th>Customer Name</th>
-              <th>Service Type</th>
+              <th>Booking Id</th>
+              <th>Serice Names</th>
               <th>Vehicle Year</th>
               <th>Vehicle Manufacturer</th>
               <th>Vehicle Model</th>
               <th>Vehicle Engine</th>
-              <th>Booking Date</th>
-              <th>Payment Status</th>
+              <th>Date of Service</th>
               <th>Location</th>
+              <th>Price</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
+            @for (bookingItem of bookingList; track $index) {
             <tr>
-              <th scope="row">1</th>
-              <td>Mark Otto</td>
-              <td>Oil Change,Brake,Battery</td>
-              <td>2020</td>
-              <td>BMW</td>
-              <td>S Class</td>
-              <td>V8 turbo</td>
-              <td>12/12/2024</td>
+              <td [matTooltip]="bookingItem._id">{{bookingItem._id | slice:0:6}}...</td>
               <td>
-                <span class="badge bg-warning text-dark">Pending</span>
-                
+                @for (serviceItem of bookingItem.serviceDetails; track $index) {
+                {{serviceItem.name}},
+                }
               </td>
-              <td>Dummy, Dummy - 4sdf56</td>
+              <td>{{bookingItem.vehicleYear}}</td>
+              <td>{{bookingItem.manufacturerDetails[0].name}}</td>
+              <td>{{bookingItem.vehicleModelDetails[0].name}}</td>
+              <td>{{bookingItem.vehicleEngineDetails[0].name}}</td>
+              <td>{{bookingItem.serviceDate | date :'shortDate'}}</td>
+              <td>{{bookingItem.location}}</td>
+              <td>{{bookingItem.totalPrice}}</td>
               <td class="text-right">
                 <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                   <mat-icon>more_vert</mat-icon>
@@ -52,72 +53,7 @@
                 </mat-menu>
               </td>
             </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark Otto</td>
-              <td>Oil Change,Brake,Battery</td>
-              <td>2020</td>
-              <td>BMW</td>
-              <td>S Class</td>
-              <td>V8 turbo</td>
-              <td>12/12/2024</td>
-              <td>
-                <span class="badge bg-success">Paid</span>                
-              </td>
-              <td>Dummy, Dummy - 4sdf56</td>
-              <td class="text-right">
-                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                  <mat-icon>more_vert</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                  <button mat-menu-item>
-                    <!-- <mat-icon>dialpad</mat-icon> -->
-                    <span>Accept</span>
-                  </button>
-                  <button mat-menu-item>
-                    <!-- <mat-icon>voicemail</mat-icon> -->
-                    <span>Reject</span>
-                  </button>
-                  <button mat-menu-item>
-                    <!-- <mat-icon>notifications_off</mat-icon> -->
-                    <span>Contact</span>
-                  </button>
-                </mat-menu>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark Otto</td>
-              <td>Oil Change,Brake,Battery</td>
-              <td>2020</td>
-              <td>BMW</td>
-              <td>S Class</td>
-              <td>V8 turbo</td>
-              <td>12/12/2024</td>
-              <td>
-                <span class="badge bg-danger">Expire</span>      
-              </td>
-              <td>Dummy, Dummy - 4sdf56</td>
-              <td class="text-right">
-                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                  <mat-icon>more_vert</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                  <button mat-menu-item>
-                    <!-- <mat-icon>dialpad</mat-icon> -->
-                    <span>Accept</span>
-                  </button>
-                  <button mat-menu-item>
-                    <!-- <mat-icon>voicemail</mat-icon> -->
-                    <span>Reject</span>
-                  </button>
-                  <button mat-menu-item>
-                    <!-- <mat-icon>notifications_off</mat-icon> -->
-                    <span>Contact</span>
-                  </button>
-                </mat-menu>
-              </td>
-            </tr>
+            }
           </tbody>
         </table>
       </div>
