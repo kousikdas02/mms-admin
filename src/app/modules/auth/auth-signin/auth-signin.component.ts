@@ -41,7 +41,7 @@ export default class AuthSigninComponent {
     this._apiService.post('auth/signin', this.loginForm.value).subscribe({
       next: (resp: any) => {
         console.log(resp)
-        if(resp.data.role != 'admin'){
+        if (resp.data.role != 'admin') {
           this._apiService.alert('Only Admins are allowed', 'warning');
           return;
         }
@@ -56,9 +56,6 @@ export default class AuthSigninComponent {
           updatedAt: resp.data.updatedAt,
           token: resp.data.accessToken
         }
-        this._storage.setUser({
-          ...userObj,
-        });
         this._storage.setUser(userObj).then(() => {
           this._apiService.alert('Successfully logged in.', 'success');
           this._event.user.set(userObj);

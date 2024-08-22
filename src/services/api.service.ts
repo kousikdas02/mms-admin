@@ -38,6 +38,13 @@ export class ApiService {
   }
 
   get(path: string, params: object = {}): any {
+    this.httpOptions.set({
+      headers: new HttpHeaders({
+        Accept: 'multipart/form-data',
+        'x-access-token': this.storage.getDataField('token') + '',
+        "Cache-Control": "max-age=84600, public"
+      })
+    })
     return this.http.get(`${this.API_URL}${path}`, { headers: this.httpOptions().headers, params: { ...params } }).pipe(catchError(this.formatErrors));
   }
 
