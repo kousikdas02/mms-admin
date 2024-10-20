@@ -43,6 +43,10 @@ const routes: Routes = [
         loadComponent: () => import('./modules/admin/settings/settings.component')
       },
       {
+        path: 'configurations',
+        loadComponent: () => import('./modules/admin/default-settings/default-settings.component').then((m) => m.DefaultSettingsComponent)
+      },
+      {
         path: 'services',
         loadComponent: () => import('./modules/admin/services/services.component')
       },

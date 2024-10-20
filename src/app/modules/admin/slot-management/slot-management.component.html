@@ -2,19 +2,22 @@
     <div class="col-xl-4 col-md-6">
         <app-card cardTitle="Select Date" [options]="false">
             <mat-card class="demo-inline-calendar-card">
-                <mat-calendar (selectedChange)="getSlots($event)" [(selected)]="selected"></mat-calendar>
+                <mat-calendar (selectedChange)="getSlots($event)" [(selected)]="selectedDate"></mat-calendar>
             </mat-card>
+            <!-- {{selectedDate}} -->
         </app-card>
     </div>
 
     <div class="col-xl-8 col-md-6">
         <app-card cardTitle="Add Slots" [options]="false">
+            @if(selectedDate){
             <form [formGroup]="slotForm">
-                <div class="row">
+                <div class="row form-group">
                     <div class="col-md-6 mb-6">
                         <label for="validationCustom01">Start Time*</label>
-                        <input type="text" class="form-control" id="startTime" placeholder="Enter Start Time"
-                            formControlName="startTime" />
+                        <input [ngxMatTimepicker]="startTime" class="form-control" id="startTime"
+                            placeholder="Enter Start Time" formControlName="startTime" [format]="24">
+                        <ngx-mat-timepicker #startTime (timeSet)="startTimeChange($event)"></ngx-mat-timepicker>
                         <p class="error"
                             *ngIf="slotForm.get('startTime').touched && slotForm.get('startTime').hasError('required')">
                             Start Time
@@ -23,15 +26,43 @@
 
                     <div class="col-md-6 mb-6">
                         <label for="validationCustom01">End Time*</label>
-                        <input type="text" class="form-control" id="endTime" placeholder="Enter End Time"
-                            formControlName="endTime" />
+                        <input [ngxMatTimepicker]="endTime" class="form-control" id="endTime"
+                            placeholder="Enter End Time" formControlName="endTime" [format]="24">
+                        <ngx-mat-timepicker #endTime (timeSet)="endTimeChange($event)"></ngx-mat-timepicker>
                         <p class="error"
                             *ngIf="slotForm.get('endTime').touched && slotForm.get('endTime').hasError('required')">End
                             Time
                             is required</p>
                     </div>
+
+                    <div class="col-md-12 mb-12" *ngIf="!this.slotForm.value._id">
+                        <label for="validationCustom01">You are seeing the default slot timing</label>
+                    </div>
+                    <div class="col-md-12 mb-12" *ngIf="this.slotForm.value.noSlot">
+                        <label for="validationCustom01">You have not added slot for this day</label>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-6">
+                        <button class="btn btn-primary" type="button" (click)="saveSlots()">Save</button>
+                    </div>
+                    <div class="col-md-6 mb-6" *ngIf="!this.slotForm.value._id">
+                        <button class="btn btn-primary" type="button" (click)="setAsUnavailable()">Set as
+                            unavailable</button>
+                    </div>
+                    <div class="col-md-6 mb-6" *ngIf="this.slotForm.value._id && !this.slotForm.value.noSlot">
+                        <button class="btn btn-primary" type="button" (click)="removeSlot()">Remove</button>
+                    </div>
                 </div>
             </form>
+            }@else {
+            <div class="row form-group">
+                <div class="col-md-12 mb-12">
+                    <p>Please select a date to see the slots</p>
+                </div>
+            </div>
+            }
         </app-card>
     </div>
 </div>

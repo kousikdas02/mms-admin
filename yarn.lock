@@ -5231,6 +5231,11 @@ mkdirp@^1.0.3:
   resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
+moment@^2.30.1:
+  version "2.30.1"
+  resolved "https://registry.npmjs.org/moment/-/moment-2.30.1.tgz"
+  integrity sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==
+
 mrmime@2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/mrmime/-/mrmime-2.0.0.tgz"
@@ -5321,6 +5326,14 @@ ngx-cookie-service@^18.0.0:
   integrity sha512-hkkUckzZTXXWtFgvVkT2hg6mwYMLXioXDZWBsVCOy9gYkADjsj0N5VViO7eo2izQ0VcMPd/Etog1trf/T4oZMQ==
   dependencies:
     tslib "^2.6.2"
+
+ngx-mat-timepicker@^18.0.0:
+  version "18.0.0"
+  resolved "https://registry.npmjs.org/ngx-mat-timepicker/-/ngx-mat-timepicker-18.0.0.tgz"
+  integrity sha512-WrvNW/Z0PhljybPMfhwKa0tVHlSCb6eK+GwUmhkA04D2aCSZ6lFHoHwtMfp6eL5eJa1kCsmS75EmikhNQhS3lg==
+  dependencies:
+    ts-luxon "^4.3.2"
+    tslib "^2.5.2"
 
 ngx-scrollbar@^15.0.1:
   version "15.0.1"
@@ -6794,12 +6807,17 @@ tree-kill@1.2.2:
   resolved "https://registry.npmjs.org/tree-kill/-/tree-kill-1.2.2.tgz"
   integrity sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==
 
+ts-luxon@^4.3.2:
+  version "4.6.2"
+  resolved "https://registry.npmjs.org/ts-luxon/-/ts-luxon-4.6.2.tgz"
+  integrity sha512-I35AoZtDQ0O49rJh7tNyECISB6nhtdOzeFZSZzIxWSSUwnmgPOJK2wZr3fK0WVmKcmWPvDGSa+GKwWXFs4prjA==
+
 tslib@^1.7.1:
   version "1.14.1"
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.0, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.6.2, tslib@^2.6.3:
+tslib@^2.0.0, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.5.2, tslib@^2.6.2, tslib@^2.6.3:
   version "2.6.3"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.6.3.tgz"
   integrity sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==

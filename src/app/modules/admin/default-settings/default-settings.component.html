@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="Configurations" [options]="false">
+            <form [formGroup]="configForm">
+                <div class="row form-group">
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom01">Minimum Booking Price*</label>
+                        <input type="text" class="form-control" id="minimumBookingPrice"
+                            placeholder="Enter Minimum Booking Price" formControlName="minimumBookingPrice" />
+                        <p class="error"
+                            *ngIf="configForm.get('minimumBookingPrice').touched && configForm.get('minimumBookingPrice').hasError('required')">
+                            Minimum Booking Price is required</p>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom01">Slot Start Time*</label>
+                        <input [ngxMatTimepicker]="startTime" class="form-control" id="price"
+                            placeholder="Enter Start Time" formControlName="startTime" [format]="24" />
+                        <ngx-mat-timepicker #startTime (timeSet)="startTimeChange($event)"></ngx-mat-timepicker>
+                        <p class="error"
+                            *ngIf="configForm.get('startTime').touched && configForm.get('startTime').hasError('required')">
+                            Start Time is required</p>
+                    </div>
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom02">Slot End Time*</label>
+                        <input [ngxMatTimepicker]="endTime" class="form-control" id="endTime"
+                            placeholder="Enter End Time" formControlName="endTime" [format]="24" />
+                        <ngx-mat-timepicker #endTime (timeSet)="endTimeChange($event)"></ngx-mat-timepicker>
+                        <p class="error"
+                            *ngIf="configForm.get('endTime').touched && configForm.get('endTime').hasError('required')">
+                            End Time is required</p>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="button" (click)="updateConfig()">Save Configuration</button>
+            </form>
+        </app-card>
+    </div>
+</div>

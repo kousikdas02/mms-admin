@@ -68,6 +68,14 @@ const NavigationItems = [
         icon: 'far fa-calendar-alt',
         classes: 'nav-item'
       },
+      {
+        id: 'configurations',
+        title: 'Configurations',
+        type: 'item',
+        url: '/configurations',
+        icon: 'fas fa-wrench',
+        classes: 'nav-item'
+      },      
       // {
       //   id: 'manufacturer',
       //   title: 'Manufacturer',
