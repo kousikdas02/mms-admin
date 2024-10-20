@@ -19,7 +19,7 @@
             <tr>
               <th scope="row">{{$index+1}}</th>
               <td>{{serviceItem.name}}</td>
-              <td>RM {{serviceItem.price}}</td>
+              <td>$ {{serviceItem.price}}</td>
               <td>
                 <span class="badge" [ngClass]="serviceItem.status=='active' ? 'bg-success' : 'bg-danger'">{{serviceItem.status}}</span>
               </td>

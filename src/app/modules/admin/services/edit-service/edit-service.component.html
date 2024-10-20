@@ -2,36 +2,44 @@
     <div class="col-sm-12">
         <div class="button_wrapper">
             <button (click)="back()" class="cmnBtn mb-3">Back</button>
-          </div>
-        <app-card cardTitle="Basic Details" [options]="false">
-            <form [formGroup]="serviceForm">
+        </div>
+        <form [formGroup]="serviceForm">
+            <app-card cardTitle="Basic Details" [options]="false">
                 <div class="row form-group">
                     <div class="col-md-6 mb-6">
                         <label for="validationCustom01">Name*</label>
-                        <input type="text" class="form-control" id="name" placeholder="Enter Name" formControlName="name"/>
+                        <input type="text" class="form-control" id="name" placeholder="Enter Name"
+                            formControlName="name" />
                         <p class="error"
                             *ngIf="serviceForm.get('name').touched && serviceForm.get('name').hasError('required')">Name
                             is required</p>
                     </div>
                     <div class="col-md-6 mb-6">
                         <label for="validationCustom01">Price*</label>
-                        <input type="text" class="form-control" id="price" placeholder="Enter Price" formControlName="price"/>
+                        <input type="text" class="form-control" id="price" placeholder="Enter Price"
+                            formControlName="price" />
                         <p class="error"
-                            *ngIf="serviceForm.get('price').touched && serviceForm.get('price').hasError('required')">Price
+                            *ngIf="serviceForm.get('price').touched && serviceForm.get('price').hasError('required')">
+                            Price
                             is required</p>
                     </div>
                     <div class="col-md-12 mb-12">
                         <label for="validationCustom02">Description*</label>
-                        <textarea type="text" class="form-control" id="description"
-                            placeholder="Enter Description" formControlName="description"></textarea>
-                            <p class="error"
-                            *ngIf="serviceForm.get('price').touched && serviceForm.get('price').hasError('required')">Price
+                        <textarea type="text" class="form-control" id="description" placeholder="Enter Description"
+                            formControlName="description"></textarea>
+                        <p class="error"
+                            *ngIf="serviceForm.get('description').touched && serviceForm.get('description').hasError('required')">
+                            Description
                             is required</p>
-                    </div>                   
+                    </div>
                     <div class="col-md-6 mb-6">
                         <label for="validationCustom02">Image*</label>
                         <input type="file" class="form-control" id="image" placeholder="Select file"
                             accept="image/png,image/jpg,image/jpeg" (change)="fileAdded($event)" />
+                        <p class="error"
+                            *ngIf="serviceForm.get('images').touched && serviceForm.get('images').hasError('required')">
+                            Images
+                            is required</p>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -40,26 +48,88 @@
                             <div class="previewImages">
                                 <ng-container *ngFor="let image of previewUploadedFiles;let i = index">
                                     <div style="margin-right: 10px;">
-                                        <mat-icon class="deleteIcon"
-                                            (click)="deleteFiles(i)">remove_circle</mat-icon>
+                                        <mat-icon class="deleteIcon" (click)="deleteFiles(i)">remove_circle</mat-icon>
                                         <img class="preview_image" src="{{ image }}" alt="" />
-                                    </div>
-                                </ng-container>
-                            </div>
-                        </ng-container>
-                        <ng-container *ngIf="previewUploadedFiles.length == 0">
-                            <div class="previewImages">
-                                <ng-container *ngFor="let image of serviceDetails?.images;let i = index">
-                                    <div style="margin-right: 10px;">
-                                        <img class="preview_image" src="{{ fileUrl+image }}" alt="" />
                                     </div>
                                 </ng-container>
                             </div>
                         </ng-container>
                     </div>
                 </div>
-                <button class="btn btn-primary" type="button" (click)="editService()">Edit Service</button>
-            </form>
-        </app-card>
+                <div class="row form-group" *ngIf="previewUploadedFiles.length == 0">
+                    <div class="col-md-6 mb-6">
+                        <ng-container>
+                            <div class="previewImages">
+                                <div style="margin-right: 10px;">
+                                    <img class="preview_image" [src]="fileUrl+serviceForm.value.images[0]" alt="" />
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </app-card>
+            <app-card cardTitle="Special Consideration" [options]="false">
+                <div class="row" [formArrayName]="'specialConsideration'">
+                    @for(controlItem of specialConsiderationList; track $index) {
+                    <div class="row form-group" [formGroup]="$any(controlItem)">
+                        <div class="col-md-6 mb-6">
+                            <label for="validationCustom01">Year*</label>
+                            <input type="text" class="form-control" id="year" placeholder="Enter Year"
+                                formControlName="year" (input)="yearChange($event,$index)" />
+                            <p class="error"
+                                *ngIf="controlItem.get('year').touched && controlItem.get('year').hasError('required')">
+                                Year is required</p>
+                        </div>
+                        <div class="col-md-6 mb-6">
+                            <label for="validationCustom02">Manufacturer*</label>
+                            <select class="form-control" formControlName="manufacturer" [id]="'manufacturer'+$index"
+                                (change)="manufacturerChange($event,$index)">
+                                <option value="" [disabled]="true">Please enter a year to get manufacturers</option>
+                            </select>
+                            <p class="error"
+                                *ngIf="controlItem.get('manufacturer').touched && controlItem.get('manufacturer').hasError('required')">
+                                Manufacturer is required</p>
+                        </div>
+                        <div class="col-md-6 mb-6">
+                            <label for="validationCustom02">Model*</label>
+                            <select class="form-control" formControlName="model" [id]="'model'+$index"
+                                (change)="modelChange($event,$index)">
+                                <option value="" [disabled]="true">Please enter a manufacturers to get models</option>
+                            </select>
+                            <p class="error"
+                                *ngIf="controlItem.get('model').touched && controlItem.get('model').hasError('required')">
+                                Model is required</p>
+                        </div>
+                        <div class="col-md-6 mb-6">
+                            <label for="validationCustom02">Engine*</label>
+                            <select class="form-control" formControlName="engine" [id]="'engine'+$index">
+                                <option value="" [disabled]="true">Please enter a model to get engines</option>
+                            </select>
+                            <p class="error"
+                                *ngIf="controlItem.get('engine').touched && controlItem.get('engine').hasError('required')">
+                                Engine is required</p>
+                        </div>
+                        <div class="col-md-6 mb-6">
+                            <label for="validationCustom01">Price*</label>
+                            <input type="text" class="form-control" id="price" placeholder="Enter Price"
+                                formControlName="price" />
+                            <p class="error"
+                                *ngIf="controlItem.get('price').touched && controlItem.get('price').hasError('required')">
+                                Price is required</p>
+                        </div>
+                        <div class="col-md-6 mb-6">
+                            <button class="btn btn-primary" type="button"
+                                (click)="RemoveSpecialConsiderationItem($index)">Remove</button>
+                        </div>
+                    </div>
+                    }
+                    <div class="col-md-6 mb-6">
+                        <button class="btn btn-primary" type="button" (click)="AddSpecialConsiderationItem()">Add More
+                            +</button>
+                    </div>
+                </div>
+            </app-card>
+            <button class="btn btn-primary" type="button" (click)="editService()">Edit Service</button>
+        </form>
     </div>
 </div>

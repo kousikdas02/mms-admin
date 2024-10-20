@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
-import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { EventService, StorageService } from '@services';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { ApiService } from '@services'
@@ -31,26 +30,79 @@ export class EditServiceComponent {
     private _route: ActivatedRoute) {
     this.formInit();
     this.getServiceDetails(this._route.snapshot.paramMap.get('serviceId'))
-
   }
   private formInit(): void {
     this.serviceForm = this._formBuilder.group({
       name: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
-      images: new FormControl('', []),
+      images: new FormControl(''),
+      price: new FormControl('', [Validators.required]),
+      specialConsideration: new FormArray([this.specialConsiderationDetails()]),
+    });
+  }
+  specialConsiderationDetails(): FormGroup {
+    return this._formBuilder.group({
+      year: new FormControl('', [Validators.required]),
+      manufacturer: new FormControl('', [Validators.required]),
+      model: new FormControl('', [Validators.required]),
+      engine: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required]),
     });
   }
+  get specialConsiderationList() {
+    return (this.serviceForm.get('specialConsideration') as FormArray)?.controls;
+  }
+  AddSpecialConsiderationItem(): void {
+    const SpecialConsiderationList = this.serviceForm.get('specialConsideration') as FormArray;
+    if (SpecialConsiderationList.valid) {
+      SpecialConsiderationList.push(this.specialConsiderationDetails());
+    } else {
+      SpecialConsiderationList.markAllAsTouched();
+    }
+  }
+  RemoveSpecialConsiderationItem(index: number): void {
+    const SpecialConsiderationList = this.serviceForm.get('specialConsideration') as FormArray;
+    SpecialConsiderationList.removeAt(index);
+  }
+
   getServiceDetails(serviceId: string) {
     this._apiService.get(`service/${serviceId}`).subscribe({
-      next: (resp: any) => {
+      next: async (resp: any) => {
         if (resp.status === 200) {
           this.serviceDetails = resp.data;
           this.serviceForm.patchValue({
             name: resp.data.name,
             description: resp.data.description,
-            price: resp.data.price
-          })
+            price: resp.data.price,
+            images:resp.data.images
+          });
+          for (let i = 0; i < this.serviceDetails.specialConsideration.length; i++) {
+            let element = this.serviceDetails.specialConsideration[i];
+            let index = i;
+            if (index > 0) {
+              this.AddSpecialConsiderationItem();
+            }
+
+            (this.serviceForm.get('specialConsideration') as FormArray).at(index).patchValue({
+              year: element.year,
+              price: element.price
+            });
+
+            await this.getManufacturerList(index);
+            (this.serviceForm.get('specialConsideration') as FormArray).at(index).patchValue({
+              manufacturer: element.manufacturer
+            });
+
+            await this.getModelList(index);
+            (this.serviceForm.get('specialConsideration') as FormArray).at(index).patchValue({
+              model: element.model
+            });
+
+            await this.getEngineList(index);
+            (this.serviceForm.get('specialConsideration') as FormArray).at(index).patchValue({
+              engine: element.engine
+            });
+          }
         } else {
           this._apiService.alert(resp.message, 'warning');
         }
@@ -60,7 +112,140 @@ export class EditServiceComponent {
       }
     })
   }
+  yearChange(event: any, index: number) {
+    if ((this.serviceForm.get('specialConsideration') as FormArray).at(index).get('year').value.length >= 4) {
+      (this.serviceForm.get('specialConsideration') as FormArray).at(index).patchValue({
+        manufacturer: '',
+        model: '',
+        engine: '',
+      });
+      this.getManufacturerList(index).then();
+    }
+  }
+  getManufacturerList(index: number): Promise<void> {
+    const year = (this.serviceForm.get('specialConsideration') as FormArray).at(index).get('year').value;
+    return new Promise((resolve, rejct) => {
+      this._apiService.get(`manufacturer?year=${year}`).subscribe({
+        next: (resp: any) => {
+          if (resp.status === 200) {
+            const selectElement = document.getElementById(`manufacturer${index}`) as HTMLSelectElement;
+            // Remove all existing options
+            while (selectElement.options.length > 0) {
+              selectElement.remove(0);
+            }
+            const option = document.createElement('option');
+            option.value = '';
+            option.text = 'Select a manufacturer';
+            selectElement.appendChild(option);
+            // Add new options
+            resp.data.forEach(optionData => {
+              const option = document.createElement('option');
+              option.value = optionData.name;
+              option.text = optionData.name;
+              selectElement.appendChild(option);
+            });
+            resolve();
+          } else {
+            this._apiService.alert(resp.message, 'warning');
+            resolve();
+          }
+        },
+        error: (err: any) => {
+          this._apiService.alert(err.message, 'error');
+          resolve();
+        }
+      })
+    })
 
+  }
+  manufacturerChange(event: any, index: number) {
+    (this.serviceForm.get('specialConsideration') as FormArray).at(index).patchValue({
+      model: '',
+      engine: '',
+    });
+    this.getModelList(index).then();;
+  }
+  getModelList(index: number): Promise<void> {
+    const year = (this.serviceForm.get('specialConsideration') as FormArray).at(index).get('year').value;
+    const manufacturer = (this.serviceForm.get('specialConsideration') as FormArray).at(index).get('manufacturer').value;
+    return new Promise((resolve, rejct) => {
+      this._apiService.get(`model?year=${year}&manufacturer=${manufacturer}`).subscribe({
+        next: (resp: any) => {
+          if (resp.status === 200) {
+            const selectElement = document.getElementById(`model${index}`) as HTMLSelectElement;
+            // Remove all existing options
+            while (selectElement.options.length > 0) {
+              selectElement.remove(0);
+            }
+            const option = document.createElement('option');
+            option.value = '';
+            option.text = 'Select a model';
+            selectElement.appendChild(option);
+            // Add new options
+            resp.data.forEach(optionData => {
+              const option = document.createElement('option');
+              option.value = optionData.name;
+              option.text = optionData.name;
+              selectElement.appendChild(option);
+            });
+            resolve()
+          } else {
+            this._apiService.alert(resp.message, 'warning');
+            resolve()
+          }
+        },
+        error: (err: any) => {
+          this._apiService.alert(err.message, 'error');
+          resolve()
+        }
+      })
+    })
+  }
+  modelChange(event: any, index: number) {
+    (this.serviceForm.get('specialConsideration') as FormArray).at(index).patchValue({
+      engine: '',
+    });
+    this.getEngineList(index).then();;
+  }
+  getEngineList(index: number): Promise<void> {
+    const year = (this.serviceForm.get('specialConsideration') as FormArray).at(index).get('year').value;
+    const manufacturer = (this.serviceForm.get('specialConsideration') as FormArray).at(index).get('manufacturer').value;
+    const model = (this.serviceForm.get('specialConsideration') as FormArray).at(index).get('model').value;
+    return new Promise((resolve, rejct) => {
+      this._apiService.get(`engine?year=${year}&model=${model}&manufacturer=${manufacturer}`).subscribe({
+        next: (resp: any) => {
+          if (resp.status === 200) {
+            const selectElement = document.getElementById(`engine${index}`) as HTMLSelectElement;
+            // Remove all existing options
+            while (selectElement.options.length > 0) {
+              selectElement.remove(0);
+            }
+            const option = document.createElement('option');
+            option.value = '';
+            option.text = 'Select a engine';
+            selectElement.appendChild(option);
+            // Add new options
+            resp.data.forEach(optionData => {
+              const option = document.createElement('option');
+              option.value = optionData.cylinders + '-' + optionData.engine_type;
+              option.text = optionData.cylinders + '-' + optionData.engine_type;
+              selectElement.appendChild(option);
+            });
+            resolve()
+
+          } else {
+            this._apiService.alert(resp.message, 'warning');
+            resolve()
+          }
+        },
+        error: (err: any) => {
+          this._apiService.alert(err.message, 'error');
+          resolve()
+        }
+      })
+    })
+
+  }
 
 
   editService(): void {
@@ -114,9 +299,6 @@ export class EditServiceComponent {
           };
         }
       }
-      this.serviceForm.patchValue({
-        images: files
-      })
     }
   }
   // To delete selected files
