@@ -55,41 +55,45 @@ const routes: Routes = [
         loadComponent: () => import('./modules/admin/services/edit-service/edit-service.component').then((m) => m.EditServiceComponent)
       },
       {
-        path: 'manufacturers',
-        loadComponent: () => import('./modules/admin/manufacturer/manufacturer.component').then((m)=>m.ManufacturerComponent)
+        path: 'slots',
+        loadComponent: () => import('./modules/admin/slot-management/slot-management.component').then((m) => m.SlotManagementComponent)
       },
-      {
-        path: 'manufacturers/add',
-        loadComponent: () => import('./modules/admin/manufacturer/add-manufacturer/add-manufacturer.component').then((m) => m.AddManufacturerComponent)
-      },
-      {
-        path: 'manufacturers/:manufacturerId',
-        loadComponent: () => import('./modules/admin/manufacturer/edit-manufacturer/edit-manufacturer.component').then((m) => m.EditManufacturerComponent)
-      },
-      {
-        path: 'models',
-        loadComponent: () => import('./modules/admin/model/model.component').then((m)=>m.ModelComponent)
-      },
-      {
-        path: 'models/add',
-        loadComponent: () => import('./modules/admin/model/add-model/add-model.component').then((m) => m.AddModelComponent)
-      },
-      {
-        path: 'models/:modelId',
-        loadComponent: () => import('./modules/admin/model/edit-model/edit-model.component').then((m) => m.EditModelComponent)
-      },
-      {
-        path: 'engines',
-        loadComponent: () => import('./modules/admin/engine/engine.component').then((m)=>m.EngineComponent)
-      },
-      {
-        path: 'engines/add',
-        loadComponent: () => import('./modules/admin/engine/add-engine/add-engine.component').then((m) => m.AddEngineComponent)
-      },
-      {
-        path: 'engines/:engineId',
-        loadComponent: () => import('./modules/admin/engine/edit-engine/edit-engine.component').then((m) => m.EditEngineComponent)
-      },
+      // {
+      //   path: 'manufacturers',
+      //   loadComponent: () => import('./modules/admin/manufacturer/manufacturer.component').then((m)=>m.ManufacturerComponent)
+      // },
+      // {
+      //   path: 'manufacturers/add',
+      //   loadComponent: () => import('./modules/admin/manufacturer/add-manufacturer/add-manufacturer.component').then((m) => m.AddManufacturerComponent)
+      // },
+      // {
+      //   path: 'manufacturers/:manufacturerId',
+      //   loadComponent: () => import('./modules/admin/manufacturer/edit-manufacturer/edit-manufacturer.component').then((m) => m.EditManufacturerComponent)
+      // },
+      // {
+      //   path: 'models',
+      //   loadComponent: () => import('./modules/admin/model/model.component').then((m)=>m.ModelComponent)
+      // },
+      // {
+      //   path: 'models/add',
+      //   loadComponent: () => import('./modules/admin/model/add-model/add-model.component').then((m) => m.AddModelComponent)
+      // },
+      // {
+      //   path: 'models/:modelId',
+      //   loadComponent: () => import('./modules/admin/model/edit-model/edit-model.component').then((m) => m.EditModelComponent)
+      // },
+      // {
+      //   path: 'engines',
+      //   loadComponent: () => import('./modules/admin/engine/engine.component').then((m)=>m.EngineComponent)
+      // },
+      // {
+      //   path: 'engines/add',
+      //   loadComponent: () => import('./modules/admin/engine/add-engine/add-engine.component').then((m) => m.AddEngineComponent)
+      // },
+      // {
+      //   path: 'engines/:engineId',
+      //   loadComponent: () => import('./modules/admin/engine/edit-engine/edit-engine.component').then((m) => m.EditEngineComponent)
+      // },
     ]
   }
 ];

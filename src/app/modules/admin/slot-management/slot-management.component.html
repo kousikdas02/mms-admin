@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-xl-4 col-md-6">
+        <app-card cardTitle="Select Date" [options]="false">
+            <mat-card class="demo-inline-calendar-card">
+                <mat-calendar (selectedChange)="getSlots($event)" [(selected)]="selected"></mat-calendar>
+            </mat-card>
+        </app-card>
+    </div>
+
+    <div class="col-xl-8 col-md-6">
+        <app-card cardTitle="Add Slots" [options]="false">
+            <form [formGroup]="slotForm">
+                <div class="row">
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom01">Start Time*</label>
+                        <input type="text" class="form-control" id="startTime" placeholder="Enter Start Time"
+                            formControlName="startTime" />
+                        <p class="error"
+                            *ngIf="slotForm.get('startTime').touched && slotForm.get('startTime').hasError('required')">
+                            Start Time
+                            is required</p>
+                    </div>
+
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom01">End Time*</label>
+                        <input type="text" class="form-control" id="endTime" placeholder="Enter End Time"
+                            formControlName="endTime" />
+                        <p class="error"
+                            *ngIf="slotForm.get('endTime').touched && slotForm.get('endTime').hasError('required')">End
+                            Time
+                            is required</p>
+                    </div>
+                </div>
+            </form>
+        </app-card>
+    </div>
+</div>

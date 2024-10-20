@@ -22,16 +22,16 @@
             <tr>
               <td [matTooltip]="bookingItem._id">{{bookingItem._id | slice:0:6}}...</td>
               <td>
-                @for (serviceItem of bookingItem.serviceDetails; track $index) {
+              @for (serviceItem of bookingItem.serviceDetails; track $index) {
                 {{serviceItem.name}},
-                }
+              }
               </td>
               <td>{{bookingItem.vehicleYear}}</td>
-              <td>{{bookingItem.manufacturerDetails[0].name}}</td>
-              <td>{{bookingItem.vehicleModelDetails[0].name}}</td>
-              <td>{{bookingItem.vehicleEngineDetails[0].name}}</td>
+              <td>{{bookingItem.vehicleManufacturer}}</td>
+              <td>{{bookingItem.vehicleModel}}</td>
+              <td>{{bookingItem.vehicleEngine}}</td>
               <td>{{bookingItem.serviceDate | date :'shortDate'}}</td>
-              <td>{{bookingItem.location}}</td>
+              <td [matTooltip]="bookingItem.location">{{bookingItem.location | slice:0:10}}...</td>
               <td>{{bookingItem.totalPrice}}</td>
               <td class="text-right">
                 <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">

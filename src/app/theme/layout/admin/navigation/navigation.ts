@@ -61,29 +61,37 @@ const NavigationItems = [
         classes: 'nav-item'
       },
       {
-        id: 'manufacturer',
-        title: 'Manufacturer',
+        id: 'slots',
+        title: 'Slots',
         type: 'item',
-        url: '/manufacturers',
-        icon: 'fas fa-industry',
+        url: '/slots',
+        icon: 'far fa-calendar-alt',
         classes: 'nav-item'
       },
-      {
-        id: 'model',
-        title: 'Model',
-        type: 'item',
-        url: '/models',
-        icon: 'fas fa-car',
-        classes: 'nav-item'
-      },
-      {
-        id: 'engine',
-        title: 'Engine',
-        type: 'item',
-        url: '/engines',
-        icon: 'fas fa-car-battery',
-        classes: 'nav-item'
-      }
+      // {
+      //   id: 'manufacturer',
+      //   title: 'Manufacturer',
+      //   type: 'item',
+      //   url: '/manufacturers',
+      //   icon: 'fas fa-industry',
+      //   classes: 'nav-item'
+      // },
+      // {
+      //   id: 'model',
+      //   title: 'Model',
+      //   type: 'item',
+      //   url: '/models',
+      //   icon: 'fas fa-car',
+      //   classes: 'nav-item'
+      // },
+      // {
+      //   id: 'engine',
+      //   title: 'Engine',
+      //   type: 'item',
+      //   url: '/engines',
+      //   icon: 'fas fa-car-battery',
+      //   classes: 'nav-item'
+      // }
     ]
   },
 ];
